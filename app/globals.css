@@ -10,6 +10,9 @@
   --accent-foreground: #04110a;
   --muted: #7fa28e;
   --ring: rgba(92, 255, 149, 0.35);
+  --font-geist-sans: "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-geist-mono: "SFMono-Regular", "Cascadia Mono", "Segoe UI Mono", Consolas,
+    monospace;
 }
 
 @theme inline {
