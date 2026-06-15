@@ -56,7 +56,7 @@ const Projects = () => {
         "Docker",
       ],
       image: "/project/project_carlok.png",
-      objectFit: "object-contain p-6", // Added more padding for better zoom out effect
+      objectFit: "object-contain p-6",
       links: [
         {
           url: "https://siruang.ppl.cs.ui.ac.id/",
@@ -66,6 +66,22 @@ const Projects = () => {
         {
           url: "https://carlok.ppl.cs.ui.ac.id/",
           label: "CARLOK",
+          kind: "demo",
+        },
+      ],
+    },
+    {
+      id: "05",
+      title: "Ruang Terang",
+      description:
+        "Website profile for a non-profit organization focused on skill development and charity events for those in need.",
+      tech: ["Next.js"],
+      image: "/project/ruang-terang.png",
+      objectFit: "object-cover",
+      links: [
+        {
+          url: "https://company-profile-ruang-terang.vercel.app/",
+          label: "Demo",
           kind: "demo",
         },
       ],
@@ -130,7 +146,7 @@ const Projects = () => {
                     ? "1px solid rgba(92, 255, 149, 0.12)"
                     : "none",
                 borderBottom:
-                  projects.indexOf(project) < 2
+                  projects.indexOf(project) < projects.length - (projects.length % 2 === 0 ? 2 : 1)
                     ? "1px solid rgba(92, 255, 149, 0.12)"
                     : "none",
               }}

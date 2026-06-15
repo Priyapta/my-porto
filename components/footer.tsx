@@ -1,9 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 
 const Footer = () => {
-  const currentYear = new Date().getFullYear();
+  const [currentYear, setCurrentYear] = useState("");
+  useEffect(() => {
+    setCurrentYear(new Date().getFullYear().toString());
+  }, []);
 
   const socialLinks = [
     {
@@ -65,7 +69,7 @@ const Footer = () => {
               Follow Me
             </h3>
             <p className="text-foreground/70 text-sm leading-relaxed">
-              Developer passionate about building scalable web systems and
+              Fullstack & AI Engineer passionate about building scalable web systems and
               intelligent robotics solutions.
             </p>
           </div>

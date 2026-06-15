@@ -6,7 +6,7 @@ import { ChevronDown } from "lucide-react";
 import Image from "next/image";
 const Hero = () => {
   const fullName = "Priyapta Naufal Sudrajat";
-  const role = "Developer";
+  const role = "Fullstack & AI Engineer";
   const [displayText, setDisplayText] = useState(fullName);
 
   useEffect(() => {
