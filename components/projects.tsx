@@ -80,7 +80,7 @@ const Projects = () => {
       objectFit: "object-cover",
       links: [
         {
-          url: "https://company-profile-ruang-terang.vercel.app/",
+          url: "https://ruang-terang.com/",
           label: "Demo",
           kind: "demo",
         },
@@ -146,7 +146,8 @@ const Projects = () => {
                     ? "1px solid rgba(92, 255, 149, 0.12)"
                     : "none",
                 borderBottom:
-                  projects.indexOf(project) < projects.length - (projects.length % 2 === 0 ? 2 : 1)
+                  projects.indexOf(project) <
+                  projects.length - (projects.length % 2 === 0 ? 2 : 1)
                     ? "1px solid rgba(92, 255, 149, 0.12)"
                     : "none",
               }}
@@ -157,8 +158,8 @@ const Projects = () => {
                 className="relative aspect-video overflow-hidden bg-[#0f1b15] transition-all duration-300 group-hover:shadow-[0_0_0_1px_rgba(92,255,149,0.12),0_0_30px_rgba(92,255,149,0.12)]"
               >
                 <div className="absolute left-4 top-4 z-10 flex flex-wrap gap-2">
-                  {(project.links ??
-                    [
+                  {(
+                    project.links ?? [
                       {
                         url: project.linkUrl,
                         label: project.linkLabel,
