@@ -1,85 +1,87 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { Menu, X } from "lucide-react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const navLinks = ["ABOUT", "PROJECT", "EXPERIENCE", "SKILLS", "CONTACT"];
-
-  const menuVariants = {
-    closed: { opacity: 0, y: -20 },
-    open: { opacity: 1, y: 0 },
-  };
-
-  const itemVariants = {
-    closed: { opacity: 0, x: -20 },
-    open: (i: number) => ({
-      opacity: 1,
-      x: 0,
-      transition: { delay: i * 0.1 },
-    }),
-  };
+  const navLinks = [
+    { label: "Profile", href: "#" },
+    { label: "Work", href: "#work" },
+    { label: "Experience", href: "#about" },
+    { label: "Skills", href: "#skills" },
+    { label: "Contact", href: "#contact" },
+  ];
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-50 flex justify-center  border-b border-emerald-400/15 bg-[#07110c]/80 px-6 py-4 backdrop-blur-xl">
-        <div className="text-xs tracking-[0.35em] font-display font-bold text-[#7dffb2]"></div>
+      <nav className="fixed top-0 w-full z-50 border-b backdrop-blur-md" style={{backgroundColor: 'rgba(7,17,12,0.88)', borderColor: 'rgba(92,255,149,0.15)'}}>
+        <div className="flex justify-between items-center h-20 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+          <a
+            href="#"
+            className="font-display-xl text-headline-md font-bold tracking-widest text-[#7dffb2] uppercase"
+          >
+            Priyapta HUB
+          </a>
 
-        <div className="hidden md:flex gap-12 lg:gap-16">
-          {navLinks.map((link) => (
-            <a
-              key={link}
-              href={`#${link.toLowerCase()}`}
-              className="nav-link px-2"
-            >
-              {link}
-            </a>
-          ))}
+          <div className="hidden md:flex items-center gap-8 font-body-md text-body-md uppercase tracking-widest">
+            {navLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                className="relative text-on-surface-variant hover:text-primary transition-colors duration-300 group"
+              >
+                {link.label}
+                <span className="absolute -bottom-1 left-0 w-0 h-px bg-[#5cff95] group-hover:w-full transition-all duration-300" />
+              </a>
+            ))}
+          </div>
+
+          <a
+            href="#contact"
+            className="hidden md:block font-body-md text-body-md uppercase tracking-widest text-primary border-b border-primary pb-1 hover:opacity-70 transition-opacity duration-300"
+          >
+            Hire Me
+          </a>
+
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden text-primary"
+            aria-label="Toggle menu"
+          >
+            {isOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
         </div>
-
-        {/* Mobile Hamburger */}
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden flex flex-col gap-1.5 w-6"
-        >
-          <span
-            className={`h-0.5 bg-foreground transition-all ${isOpen ? "rotate-45 translate-y-2" : ""}`}
-          />
-          <span
-            className={`h-0.5 bg-foreground transition-all ${isOpen ? "opacity-0" : ""}`}
-          />
-          <span
-            className={`h-0.5 bg-foreground transition-all ${isOpen ? "-rotate-45 -translate-y-2" : ""}`}
-          />
-        </button>
       </nav>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial="closed"
-            animate="open"
-            exit="closed"
-            variants={menuVariants}
-            className="fixed inset-0 top-16 z-40 flex flex-col items-center justify-center gap-8 bg-[#07110c] md:hidden"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 top-20 z-40 bg-[#07110c] flex flex-col items-center justify-center gap-10 md:hidden"
           >
-            {navLinks.map((link, i) => (
-              <motion.a
-                key={link}
-                custom={i}
-                variants={itemVariants}
-                initial="closed"
-                animate="open"
-                href={`#${link.toLowerCase()}`}
+            {navLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
                 onClick={() => setIsOpen(false)}
-                className="text-2xl uppercase tracking-widest text-foreground hover:text-accent transition-colors"
+                className="font-display-xl-mobile text-headline-lg text-primary uppercase tracking-widest"
               >
-                {link}
-              </motion.a>
+                {link.label}
+              </a>
             ))}
+            <a
+              href="#contact"
+              onClick={() => setIsOpen(false)}
+              className="font-label-md text-label-md uppercase tracking-widest text-primary border-b border-primary pb-1"
+            >
+              Hire Me
+            </a>
           </motion.div>
         )}
       </AnimatePresence>

@@ -1,102 +1,131 @@
 "use client";
 
 import { motion } from "framer-motion";
+import {
+  SiReact, SiNextdotjs, SiTypescript, SiTailwindcss,
+  SiPython, SiDjango, SiFastapi, SiNodedotjs, SiRust, SiSpring,
+  SiPostgresql, SiRedis, SiFirebase,
+  SiDocker, SiLinux, SiGit,
+  SiCplusplus,
+} from "react-icons/si";
+import { FaRobot, FaBroadcastTower, FaNetworkWired, FaAws } from "react-icons/fa";
 
-const Skills = () => {
-  const skillRows = [
-    [
-      "React",
-      "TypeScript",
-      "Node.js",
-      "Next.js",
-      "Linux",
+interface Skill {
+  name: string;
+  icon: React.ReactNode;
+  color: string;
+}
 
-      "PostgreSQL",
-      "Tailwind",
+interface Category {
+  label: string;
+  skills: Skill[];
+}
+
+const categories: Category[] = [
+  {
+    label: "Frontend",
+    skills: [
+      { name: "React",        icon: <SiReact />,       color: "#61DAFB" },
+      { name: "Next.js",      icon: <SiNextdotjs />,   color: "#ffffff" },
+      { name: "TypeScript",   icon: <SiTypescript />,  color: "#3178C6" },
+      { name: "Tailwind CSS", icon: <SiTailwindcss />, color: "#06B6D4" },
     ],
-    [
-      "Python",
-      "FastAPI",
-      "Docker",
-      "AWS",
-      "Firebase",
-      "Redis",
-      "WebSocket",
-      "Jest",
+  },
+  {
+    label: "Backend",
+    skills: [
+      { name: "Python",      icon: <SiPython />,    color: "#FFD43B" },
+      { name: "Django",      icon: <SiDjango />,    color: "#44B78B" },
+      { name: "FastAPI",     icon: <SiFastapi />,   color: "#009688" },
+      { name: "Node.js",     icon: <SiNodedotjs />, color: "#339933" },
+      { name: "Rust",        icon: <SiRust />,      color: "#CE422B" },
+      { name: "Spring Boot", icon: <SiSpring />,    color: "#6DB33F" },
     ],
-  ];
+  },
+  {
+    label: "Database",
+    skills: [
+      { name: "PostgreSQL", icon: <SiPostgresql />, color: "#4169E1" },
+      { name: "Redis",      icon: <SiRedis />,      color: "#DC382D" },
+      { name: "Firebase",   icon: <SiFirebase />,   color: "#FFCA28" },
+    ],
+  },
+  {
+    label: "DevOps",
+    skills: [
+      { name: "Docker", icon: <SiDocker />, color: "#2496ED" },
+      { name: "AWS",    icon: <FaAws />,    color: "#FF9900" },
+      { name: "Linux",  icon: <SiLinux />,  color: "#FCC624" },
+      { name: "Git",    icon: <SiGit />,    color: "#F05032" },
+    ],
+  },
+  {
+    label: "Hardware",
+    skills: [
+      { name: "ROS 2",     icon: <FaRobot />,         color: "#22D3EE" },
+      { name: "C++",       icon: <SiCplusplus />,     color: "#00599C" },
+      { name: "LoRa",      icon: <FaBroadcastTower />, color: "#A78BFA" },
+      { name: "WebSocket", icon: <FaNetworkWired />,   color: "#34D399" },
+    ],
+  },
+];
 
-  const containerVariants = {
-    hidden: { opacity: 0, y: 40 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6 },
-    },
-  };
+const BORDER = { borderColor: "rgba(92,255,149,0.15)" };
 
-  return (
-    <section
-      id="skills"
-      className="min-h-screen flex items-center justify-center px-4 py-20 overflow-hidden"
-    >
+const Skills = () => (
+  <section id="skills" className="w-full border-t" style={BORDER}>
+    <div className="py-section-gap md:py-section-gap-desktop px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
       <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.1 }}
-        className="w-full max-w-5xl"
+        initial={{ opacity: 0, y: 32 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        className="mb-16"
       >
-        <h2 className="text-4xl md:text-6xl font-display font-bold text-foreground mb-20 tracking-tight text-center">
-          TECHNICAL SKILLS
+        <h2 className="font-headline-lg text-headline-lg text-[#5cff95] tracking-tight">
+          Technical Skills
         </h2>
-
-        <div className="space-y-12">
-          {skillRows.map((skills, rowIndex) => (
-            <div key={rowIndex} className="relative overflow-hidden">
-              <motion.div
-                animate={{
-                  x: rowIndex % 2 === 0 ? [0, -1000] : [-1000, 0],
-                }}
-                transition={{
-                  duration: 20,
-                  repeat: Infinity,
-                  ease: "linear",
-                }}
-                className="flex gap-8 whitespace-nowrap pb-4"
-              >
-                {/* First set */}
-                {skills.map((skill) => (
-                  <div
-                    key={skill}
-                    className="flex items-center gap-4 text-lg font-display font-bold text-foreground"
-                  >
-                    <span>{skill}</span>
-                    <span className="text-accent">✦</span>
-                  </div>
-                ))}
-
-                {/* Duplicate for seamless loop */}
-                {skills.map((skill) => (
-                  <div
-                    key={`${skill}-2`}
-                    className="flex items-center gap-4 text-lg font-display font-bold text-foreground"
-                  >
-                    <span>{skill}</span>
-                    <span className="text-accent">✦</span>
-                  </div>
-                ))}
-              </motion.div>
-
-              {/* Gradient overlays */}
-              <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-background to-transparent pointer-events-none" />
-              <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-background to-transparent pointer-events-none" />
-            </div>
-          ))}
-        </div>
       </motion.div>
-    </section>
-  );
-};
+
+      <div className="space-y-0">
+        {categories.map((cat, i) => (
+          <motion.div
+            key={cat.label}
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.1 }}
+            transition={{ duration: 0.6, delay: i * 0.09, ease: [0.22, 1, 0.36, 1] }}
+            className="grid grid-cols-1 md:grid-cols-[140px_1fr] gap-4 md:gap-10 py-8 border-b items-start"
+            style={BORDER}
+          >
+            <span className="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest pt-1">
+              {cat.label}
+            </span>
+
+            <div className="flex flex-wrap gap-3">
+              {cat.skills.map((skill) => (
+                <div
+                  key={skill.name}
+                  className="flex items-center gap-2 border px-4 py-2.5 text-primary hover:bg-white/5 transition-all duration-200 group cursor-default"
+                  style={BORDER}
+                >
+                  <span
+                    className="text-base transition-colors duration-200"
+                    style={{ color: skill.color }}
+                  >
+                    {skill.icon}
+                  </span>
+                  <span className="font-label-md text-label-md uppercase tracking-widest">
+                    {skill.name}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  </section>
+);
 
 export default Skills;

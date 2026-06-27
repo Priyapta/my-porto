@@ -1,183 +1,140 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { ChevronDown } from "lucide-react";
 import Image from "next/image";
+import { motion } from "framer-motion";
+
+const blobVariants = {
+  animate: {
+    y: [0, -20, 0],
+    x: [0, 10, 0],
+    transition: { duration: 8, repeat: Infinity, ease: "easeInOut" as const },
+  },
+};
+
 const Hero = () => {
-  const fullName = "Priyapta Naufal Sudrajat";
-  const role = "Fullstack & AI Engineer";
-  const [displayText, setDisplayText] = useState(fullName);
-
-  useEffect(() => {
-    let index = 0;
-    setDisplayText("");
-    const interval = setInterval(() => {
-      if (index < fullName.length) {
-        setDisplayText(fullName.substring(0, index + 1));
-        index++;
-      } else {
-        clearInterval(interval);
-      }
-    }, 100);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  const blobVariants = {
-    animate: {
-      y: [0, -20, 0],
-      x: [0, 10, 0],
-      transition: {
-        duration: 8,
-        repeat: Infinity,
-        ease: "easeInOut" as const,
-      },
-    },
-  };
-
-  const containerVariants = {
-    animate: {
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
   return (
-    <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[radial-gradient(circle_at_top,_rgba(92,255,149,0.16),_transparent_32%),radial-gradient(circle_at_80%_20%,_rgba(0,255,65,0.12),_transparent_22%),linear-gradient(180deg,_#07110c_0%,_#040806_100%)] pt-16">
-      {/* Background Grid SVG */}
-      <svg
-        className="absolute inset-0 w-full h-full opacity-10"
-        viewBox="0 0 1000 1000"
-        preserveAspectRatio="none"
-      >
-        <defs>
-          <pattern
-            id="grid"
-            width="100"
-            height="100"
-            patternUnits="userSpaceOnUse"
-          >
-            <path
-              d="M 100 0 L 0 0 0 100"
-              fill="none"
-              stroke="#00FF41"
-              strokeWidth="0.5"
-            />
-          </pattern>
-        </defs>
-        <rect width="1000" height="1000" fill="url(#grid)" />
-      </svg>
+    <section className="relative overflow-hidden min-h-screen">
+      {/* Full-width green gradient */}
+      <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_top,_rgba(92,255,149,0.14),_transparent_38%),radial-gradient(circle_at_80%_20%,_rgba(0,255,65,0.10),_transparent_28%)]" />
 
-      {/* Animated Blobs */}
+      {/* Animated blobs — full viewport */}
       <motion.div
         variants={blobVariants}
         animate="animate"
-        className="absolute -left-20 -top-20 h-96 w-96 rounded-full bg-[#5cff95] blur-3xl opacity-20"
+        className="absolute -left-20 -top-10 h-96 w-96 rounded-full bg-[#5cff95] blur-3xl opacity-[0.18] pointer-events-none"
       />
       <motion.div
         variants={blobVariants}
         animate="animate"
-        transition={{ delay: 2 }}
-        className="absolute bottom-0 right-0 h-96 w-96 rounded-full bg-[#34d399] blur-3xl opacity-20"
+        transition={{ delay: 2.5 }}
+        className="absolute bottom-0 right-10 h-72 w-72 rounded-full bg-[#34d399] blur-3xl opacity-[0.15] pointer-events-none"
       />
       <motion.div
         variants={blobVariants}
         animate="animate"
-        transition={{ delay: 4 }}
-        className="absolute left-1/2 top-1/2 h-72 w-72 rounded-full bg-[#00ff41] blur-3xl opacity-15"
+        transition={{ delay: 5 }}
+        className="absolute left-1/2 top-1/2 h-56 w-56 rounded-full bg-[#00ff41] blur-3xl opacity-[0.10] pointer-events-none"
       />
 
-      {/* Content */}
-      <div className="relative z-10 mx-auto grid w-full max-w-6xl gap-10 px-4 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:px-8">
-        <div className="text-center lg:text-left">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h1 className="mb-4 text-5xl font-display font-bold tracking-tight text-foreground md:text-7xl lg:text-8xl">
-              {displayText}
-              <span className="animate-pulse text-accent">|</span>
-            </h1>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="mb-12 flex items-center justify-center gap-2 lg:justify-start"
-          >
-            <span className="text-xl text-foreground md:text-2xl">{role}</span>
-            <span className="animate-pulse text-accent">●</span>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="flex flex-col justify-center gap-4 sm:flex-row lg:justify-start"
-          >
-            <a
-              href="#project"
-              className="bg-[#5cff95] px-8 py-3 text-center font-display text-sm font-bold tracking-widest text-[#04110a] shadow-[0_0_30px_rgba(92,255,149,0.22)] transition-opacity hover:opacity-90"
-            >
-              VIEW WORK
-            </a>
-            <a
-              href="#contact"
-              className="border border-emerald-300/40 bg-emerald-400/5 px-8 py-3 text-center font-display text-sm font-bold tracking-widest text-[#7dffb2] transition-colors hover:bg-emerald-400/10"
-            >
-              CONTACT
-            </a>
-          </motion.div>
-        </div>
-
+      {/* Constrained content */}
+      <div className="relative z-10 pt-28 md:pt-40 pb-section-gap md:pb-section-gap-desktop px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto flex flex-col md:flex-row items-center justify-between min-h-screen gap-8 md:gap-12">
         <motion.div
-          initial={{ opacity: 0, scale: 0.96, x: 30 }}
-          animate={{ opacity: 1, scale: 1, x: 0 }}
-          transition={{ duration: 0.7, delay: 0.25 }}
-          className="relative mx-auto flex items-center justify-center group cursor-pointer"
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          className="max-w-2xl flex flex-col flex-1 self-stretch justify-between py-8"
         >
-          {/* Blur Background Effect */}
-          <div className="absolute inset-0 flex items-center justify-center transition-all duration-500 group-hover:scale-110">
-            <div className="w-64 h-64 md:w-80 md:h-80 rounded-full blur-3xl opacity-30 bg-accent group-hover:opacity-50 transition-opacity duration-500" />
+          <div className="space-y-8">
+            <h1 className="font-display-xl-mobile md:font-display-xl text-display-xl-mobile md:text-display-xl text-primary font-bold tracking-tighter leading-tight">
+              Priyapta Naufal Sudrajat
+              <br />
+              <span className="text-on-surface-variant text-display-xl-mobile md:text-headline-lg font-normal">
+                Fullstack &amp; AI Engineer
+              </span>
+            </h1>
+
+            <p className="font-body-lg text-body-lg md:text-[1.25rem] md:leading-relaxed text-on-surface-variant max-w-xl">
+              I&apos;m a Computer Science student passionate about backend
+              development, system design, and the intersection of software with
+              the physical world. I build scalable, secure web applications using
+              Rust, Django, Spring Boot, and Next.js focusing on clean
+              architecture and robust authentication systems.
+            </p>
           </div>
 
-          {/* Profile Container */}
-          <div className="flex shrink-0 overflow-hidden rounded-full relative w-64 h-64 md:w-80 md:h-80 border-4 border-accent/20 transition-all duration-500 ease-out group-hover:scale-105 group-hover:border-accent/40 group-hover:shadow-[0_0_40px_rgba(92,255,149,0.3)]">
-            <div className="absolute inset-0 blur-xl">
-              <Image
-                src="/project/profiles.png"
-                alt=""
-                aria-hidden="true"
-                fill
-                sizes="(max-width: 1024px) 100vw, 320px"
-                className="object-cover scale-110"
-              />
-            </div>
+          <a
+            href="/file/CV_PriyaptaNaufal .pdf"
+            download
+            className="inline-flex items-center gap-2.5 border px-5 py-3 font-body-md text-body-md uppercase tracking-widest text-[#5cff95] hover:bg-[#5cff95]/10 transition-colors duration-300 w-fit"
+            style={{ borderColor: "rgba(92,255,149,0.35)" }}
+          >
+            <svg viewBox="0 0 24 24" className="w-4 h-4 fill-none stroke-current shrink-0" strokeWidth={1.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M12 4v12m0 0l-4-4m4 4l4-4" />
+            </svg>
+            Download CV
+          </a>
 
+          <div
+            className="flex gap-8 pt-4 border-t"
+            style={{ borderColor: "rgba(92,255,149,0.15)" }}
+          >
+            <div>
+              <div className="font-display-xl text-headline-lg text-[#5cff95]">
+                2+
+              </div>
+              <div className="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest">
+                Years Exp
+              </div>
+            </div>
+            <div>
+              <div className="font-display-xl text-headline-lg text-[#5cff95]">
+                5+
+              </div>
+              <div className="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest">
+                Projects
+              </div>
+            </div>
+            <div>
+              <div className="font-display-xl text-headline-lg text-[#5cff95]">
+                2+
+              </div>
+              <div className="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest">
+                Organizations
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.96 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="relative shrink-0 group cursor-pointer p-3"
+        >
+          {/* Glow blob */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="w-full h-full blur-3xl opacity-25 bg-accent group-hover:opacity-40 transition-opacity duration-500" />
+          </div>
+
+          {/* Corner brackets */}
+          <div className="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2" style={{ borderColor: "#5cff95" }} />
+          <div className="absolute top-0 right-0 w-6 h-6 border-t-2 border-r-2" style={{ borderColor: "#5cff95" }} />
+          <div className="absolute bottom-0 left-0 w-6 h-6 border-b-2 border-l-2" style={{ borderColor: "#5cff95" }} />
+          <div className="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2" style={{ borderColor: "#5cff95" }} />
+
+          {/* Photo */}
+          <div className="w-64 h-80 overflow-hidden relative transition-all duration-500 group-hover:shadow-[0_0_40px_rgba(92,255,149,0.2)]">
             <Image
               src="/project/profiles.png"
-              alt="Foto profil Priyapta"
+              alt="Priyapta Profile"
               fill
+              className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
               priority
-              sizes="(max-width: 1024px) 100vw, 320px"
-              className="object-cover relative z-10 transition-transform duration-500 group-hover:scale-110"
+              sizes="256px"
             />
           </div>
         </motion.div>
       </div>
-
-      {/* Scroll Indicator */}
-      <motion.div
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
-      >
-        <ChevronDown className="w-6 h-6 text-accent" />
-      </motion.div>
     </section>
   );
 };
