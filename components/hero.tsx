@@ -42,9 +42,8 @@ const Hero = () => {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
-          className="max-w-2xl flex flex-col flex-1 self-stretch justify-between py-8"
+          className="max-w-2xl flex flex-col flex-1 gap-8"
         >
-          <div className="space-y-8">
             <h1 className="font-display-xl-mobile md:font-display-xl text-display-xl-mobile md:text-display-xl text-primary font-bold tracking-tighter leading-tight">
               Priyapta Naufal Sudrajat
               <br />
@@ -60,7 +59,6 @@ const Hero = () => {
               Rust, Django, Spring Boot, and Next.js focusing on clean
               architecture and robust authentication systems.
             </p>
-          </div>
 
           <a
             href="/file/CV_PriyaptaNaufal .pdf"
