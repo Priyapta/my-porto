@@ -74,10 +74,7 @@ const Hero = () => {
             Download CV
           </a>
 
-          <div
-            className="flex gap-8 pt-4 border-t"
-            style={{ borderColor: "rgba(92,255,149,0.15)" }}
-          >
+          <div className="flex gap-8 pt-4" style={{ borderTop: "1px solid rgba(92,255,149,0.15)" }}>
             <div>
               <div className="font-display-xl text-headline-lg text-[#5cff95]">
                 2+

@@ -103,7 +103,6 @@
 
 * {
   box-sizing: border-box;
-  border-color: var(--border);
 }
 
 html {
