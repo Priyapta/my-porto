@@ -72,6 +72,23 @@ const categories: Category[] = [
 
 const BORDER = { borderColor: "rgba(92,255,149,0.15)" };
 
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.07, delayChildren: 0.1 },
+  },
+};
+
+const badgeVariants = {
+  hidden: { opacity: 0, y: 16, scale: 0.92 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
 const Skills = () => (
   <section id="skills" className="w-full border-t" style={BORDER}>
     <div className="py-section-gap md:py-section-gap-desktop px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
@@ -91,10 +108,10 @@ const Skills = () => (
         {categories.map((cat, i) => (
           <motion.div
             key={cat.label}
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.1 }}
-            transition={{ duration: 0.6, delay: i * 0.09, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
             className="grid grid-cols-1 md:grid-cols-[140px_1fr] gap-4 md:gap-10 py-8 border-b items-start"
             style={BORDER}
           >
@@ -102,25 +119,39 @@ const Skills = () => (
               {cat.label}
             </span>
 
-            <div className="flex flex-wrap gap-3">
+            <motion.div
+              className="flex flex-wrap gap-3"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.1 }}
+            >
               {cat.skills.map((skill) => (
-                <div
+                <motion.div
                   key={skill.name}
-                  className="flex items-center gap-2 border px-4 py-2.5 text-primary hover:bg-white/5 transition-all duration-200 group cursor-default"
+                  variants={badgeVariants}
+                  whileHover={{
+                    scale: 1.06,
+                    boxShadow: `0 0 14px 2px ${skill.color}40`,
+                    borderColor: `${skill.color}80`,
+                    transition: { duration: 0.18 },
+                  }}
+                  className="flex items-center gap-2 border px-4 py-2.5 text-primary cursor-default"
                   style={BORDER}
                 >
-                  <span
-                    className="text-base transition-colors duration-200"
+                  <motion.span
+                    className="text-base"
                     style={{ color: skill.color }}
+                    whileHover={{ rotate: [0, -12, 12, 0], transition: { duration: 0.4 } }}
                   >
                     {skill.icon}
-                  </span>
+                  </motion.span>
                   <span className="font-label-md text-label-md uppercase tracking-widest">
                     {skill.name}
                   </span>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </motion.div>
         ))}
       </div>

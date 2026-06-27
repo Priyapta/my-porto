@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
 const blobVariants = {
   animate: {
@@ -11,7 +12,38 @@ const blobVariants = {
   },
 };
 
+function useTypewriter(text: string, speed = 60, startDelay = 300) {
+  const [displayed, setDisplayed] = useState("");
+  const [done, setDone] = useState(false);
+
+  useEffect(() => {
+    setDisplayed("");
+    setDone(false);
+    let i = 0;
+    const timeout = setTimeout(() => {
+      const interval = setInterval(() => {
+        i++;
+        setDisplayed(text.slice(0, i));
+        if (i >= text.length) {
+          clearInterval(interval);
+          setDone(true);
+        }
+      }, speed);
+      return () => clearInterval(interval);
+    }, startDelay);
+    return () => clearTimeout(timeout);
+  }, [text, speed, startDelay]);
+
+  return { displayed, done };
+}
+
 const Hero = () => {
+  const { displayed, done } = useTypewriter(
+    "Priyapta Naufal Sudrajat",
+    65,
+    400,
+  );
+
   return (
     <section className="relative overflow-hidden min-h-screen">
       {/* Full-width green gradient */}
@@ -44,21 +76,27 @@ const Hero = () => {
           transition={{ duration: 0.7 }}
           className="max-w-2xl flex flex-col flex-1 gap-8"
         >
-            <h1 className="font-display-xl-mobile md:font-display-xl text-display-xl-mobile md:text-display-xl text-primary font-bold tracking-tighter leading-tight">
-              Priyapta Naufal Sudrajat
-              <br />
-              <span className="text-on-surface-variant text-display-xl-mobile md:text-headline-lg font-normal">
-                Fullstack &amp; AI Engineer
-              </span>
-            </h1>
+          <h1 className="font-display-xl-mobile md:font-display-xl text-display-xl-mobile md:text-display-xl text-primary font-bold tracking-tighter leading-tight">
+            <span className="relative inline-block">
+              {displayed}
+              <span
+                className={`inline-block w-[3px] h-[0.85em] bg-[#5cff95] align-middle ml-1 ${done ? "animate-[blink_1s_step-end_infinite]" : ""}`}
+                style={{ verticalAlign: "middle" }}
+              />
+            </span>
+            <br />
+            <span className="text-on-surface-variant text-display-xl-mobile md:text-headline-lg font-normal">
+              Fullstack &amp; AI Engineer
+            </span>
+          </h1>
 
-            <p className="font-body-lg text-body-lg md:text-[1.25rem] md:leading-relaxed text-on-surface-variant max-w-xl">
-              I&apos;m a Computer Science student passionate about backend
-              development, system design, and the intersection of software with
-              the physical world. I build scalable, secure web applications using
-              Rust, Django, Spring Boot, and Next.js focusing on clean
-              architecture and robust authentication systems.
-            </p>
+          <p className="font-body-lg text-body-lg md:text-[1.25rem] md:leading-relaxed text-on-surface-variant max-w-xl">
+            I'm a Computer Science student passionate about backend development,
+            system design, and AI-powered applications. I build scalable and
+            secure web applications using Spring Boot, Django, Flutter, and
+            Next.js, with experience in computer vision, API development, and
+            designing reliable software systems
+          </p>
 
           <a
             href="/file/CV_PriyaptaNaufal .pdf"
@@ -66,13 +104,24 @@ const Hero = () => {
             className="inline-flex items-center gap-2.5 border px-5 py-3 font-body-md text-body-md uppercase tracking-widest text-[#5cff95] hover:bg-[#5cff95]/10 transition-colors duration-300 w-fit"
             style={{ borderColor: "rgba(92,255,149,0.35)" }}
           >
-            <svg viewBox="0 0 24 24" className="w-4 h-4 fill-none stroke-current shrink-0" strokeWidth={1.5}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M12 4v12m0 0l-4-4m4 4l4-4" />
+            <svg
+              viewBox="0 0 24 24"
+              className="w-4 h-4 fill-none stroke-current shrink-0"
+              strokeWidth={1.5}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M12 4v12m0 0l-4-4m4 4l4-4"
+              />
             </svg>
             Download CV
           </a>
 
-          <div className="flex gap-8 pt-4" style={{ borderTop: "1px solid rgba(92,255,149,0.15)" }}>
+          <div
+            className="flex gap-8 pt-4"
+            style={{ borderTop: "1px solid rgba(92,255,149,0.15)" }}
+          >
             <div>
               <div className="font-display-xl text-headline-lg text-[#5cff95]">
                 2+
@@ -112,10 +161,22 @@ const Hero = () => {
           </div>
 
           {/* Corner brackets */}
-          <div className="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2" style={{ borderColor: "#5cff95" }} />
-          <div className="absolute top-0 right-0 w-6 h-6 border-t-2 border-r-2" style={{ borderColor: "#5cff95" }} />
-          <div className="absolute bottom-0 left-0 w-6 h-6 border-b-2 border-l-2" style={{ borderColor: "#5cff95" }} />
-          <div className="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2" style={{ borderColor: "#5cff95" }} />
+          <div
+            className="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2"
+            style={{ borderColor: "#5cff95" }}
+          />
+          <div
+            className="absolute top-0 right-0 w-6 h-6 border-t-2 border-r-2"
+            style={{ borderColor: "#5cff95" }}
+          />
+          <div
+            className="absolute bottom-0 left-0 w-6 h-6 border-b-2 border-l-2"
+            style={{ borderColor: "#5cff95" }}
+          />
+          <div
+            className="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2"
+            style={{ borderColor: "#5cff95" }}
+          />
 
           {/* Photo */}
           <div className="w-64 h-80 overflow-hidden relative transition-all duration-500 group-hover:shadow-[0_0_40px_rgba(92,255,149,0.2)]">

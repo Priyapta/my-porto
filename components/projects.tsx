@@ -36,7 +36,7 @@ const projects: Project[] = [
     tech: ["ROS 2", "Python", "Linux", "C++"],
     image: "/project/project_robot.jpeg",
     featured: true,
-    year: "2024",
+    year: "2025",
     links: [{ url: "https://github.com/Gladiatos-Programming/Simulasi-Gazebo-Darnet", label: "GitHub", kind: "github" }],
   },
   {
@@ -55,7 +55,7 @@ const projects: Project[] = [
     description: "IoT LoRa mesh communication device for fishermen at sea.",
     tech: ["React", "PostgreSQL", "LoRa", "C++"],
     image: "/project/project_gemastik.png",
-    featured: true,
+    featured: false,
     year: "Jun–Sept 2025",
     links: [{ url: "https://github.com/orgs/PACILGEMAS/repositories", label: "GitHub", kind: "github" }],
   },
@@ -67,7 +67,7 @@ const projects: Project[] = [
     image: "/project/project_carlok.png",
     objectClass: "object-contain p-4",
     featured: true,
-    year: "2024",
+    year: "2026",
     links: [
       { url: "https://siruang.ppl.cs.ui.ac.id/", label: "SiRuang", kind: "demo" },
       { url: "https://carlok.ppl.cs.ui.ac.id/", label: "CARLOK", kind: "demo" },
@@ -79,8 +79,8 @@ const projects: Project[] = [
     description: "Website for a non-profit focused on skill development and charity events.",
     tech: ["Next.js", "PostgreSQL", "Google Analytics"],
     image: "/project/ruang-terang.png",
-    featured: false,
-    year: "2024",
+    featured: true,
+    year: "2026",
     links: [{ url: "https://ruang-terang.com/", label: "Live Demo", kind: "demo" }],
   },
 ];
