@@ -17,7 +17,13 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="fixed top-0 w-full z-50 border-b backdrop-blur-md" style={{backgroundColor: 'rgba(7,17,12,0.88)', borderColor: 'rgba(92,255,149,0.15)'}}>
+      <nav
+        className="fixed top-0 w-full z-50 border-b"
+        style={{
+          backgroundColor: "rgba(7,17,12,0.97)",
+          borderColor: "rgba(92,255,149,0.15)",
+        }}
+      >
         <div className="flex justify-between items-center h-20 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
           <a
             href="#"
