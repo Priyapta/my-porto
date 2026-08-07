@@ -66,16 +66,21 @@ const Hero = () => {
           className="max-w-2xl flex flex-col flex-1 gap-8"
         >
           <h1 className="font-display-xl-mobile md:font-display-xl text-display-xl-mobile md:text-display-xl text-primary font-bold tracking-tighter leading-tight">
-            <span className="relative inline-block">
-              {displayed}
-              <span
-                className={`inline-block w-[3px] h-[0.85em] bg-[#5cff95] align-middle ml-1 ${done ? "animate-[blink_1s_step-end_infinite]" : ""}`}
-                style={{ verticalAlign: "middle" }}
-              />
+            <span className="sr-only">
+              Priyapta Naufal Sudrajat, Fullstack and AI Engineer
             </span>
-            <br />
-            <span className="text-on-surface-variant text-display-xl-mobile md:text-headline-lg font-normal">
-              Fullstack &amp; AI Engineer
+            <span aria-hidden="true">
+              <span className="relative inline-block">
+                {displayed}
+                <span
+                  className={`inline-block w-[3px] h-[0.85em] bg-[#5cff95] align-middle ml-1 ${done ? "animate-[blink_1s_step-end_infinite]" : ""}`}
+                  style={{ verticalAlign: "middle" }}
+                />
+              </span>
+              <br />
+              <span className="text-on-surface-variant text-display-xl-mobile md:text-headline-lg font-normal">
+                Fullstack &amp; AI Engineer
+              </span>
             </span>
           </h1>
 
